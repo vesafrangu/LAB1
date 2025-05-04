@@ -23,7 +23,7 @@
                 <label for="message" class="form-label">Message</label>
                 <textarea id="message" v-model="form.message" class="form-control" rows="4" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Dërgo</button>
+              <button type="submit" class="btn btn-primary w-100">Send</button>
             </form>
 
             <div v-if="submitted" class="alert alert-success mt-3 text-center">

@@ -12,7 +12,8 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link text-primary" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link text-primary" href="#">Countries</a></li>
-          <li class="nav-item"><a class="nav-link text-primary" href="#">Contact</a></li>
+          <li class="nav-item">  <router-link to="/contact" class="nav-link text-primary">Contact</router-link>
+</li>
         </ul>
       </div>
     </div>
