@@ -14,7 +14,7 @@
           <ul class="list-unstyled">
             <li><a href="#" class="text-white text-decoration-none">Home</a></li>
             <li><a href="#" class="text-white text-decoration-none">Countries</a></li>
-            <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+<li> <router-link to="/contact" class="text-white text-decoration-none">Contact</router-link> </li>
           </ul>
         </div>
 
