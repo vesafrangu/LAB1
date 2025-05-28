@@ -1,29 +1,46 @@
 <template>
   <div class="contact-background d-flex flex-column min-vh-100">
-    <!-- Navbar -->
-    <Navbar />
 
-    <!-- Kontakt Form dhe Foto Lokacioni -->
     <div class="container my-5 flex-grow-1">
       <div class="row">
-        <!-- Kolona për Formën -->
+        <!-- Forma -->
         <div class="col-md-6">
-          <div class="form-container shadow">
-            <h3 class="text-center mb-4">Contact us</h3>
+          <div class="form-container shadow-sm animate-fade-in">
+            <h3 class="contact-title text-primary mb-4 text-center">Contact Us</h3>
             <form @submit.prevent="submitForm">
               <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" id="name" v-model="form.name" class="form-control" required />
+                <label for="name" class="form-label filter-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  v-model="form.name"
+                  class="form-control filter-select"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" v-model="form.email" class="form-control" required />
+                <label for="email" class="form-label filter-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  v-model="form.email"
+                  class="form-control filter-select"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <label for="message" class="form-label">Message</label>
-                <textarea id="message" v-model="form.message" class="form-control" rows="4" required></textarea>
+                <label for="message" class="form-label filter-label">Message</label>
+                <textarea
+                  id="message"
+                  v-model="form.message"
+                  class="form-control filter-select"
+                  rows="4"
+                  required
+                ></textarea>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Send</button>
+              <button type="submit" class="btn btn-outline-primary w-100 reset-btn">
+                Send
+              </button>
             </form>
 
             <div v-if="submitted" class="alert alert-success mt-3 text-center">
@@ -32,31 +49,21 @@
           </div>
         </div>
 
-        <!-- Kolona për Foto Lokacioni -->
+        <!-- Lokacioni per foto -->
         <div class="col-md-6">
-          <div class="location-image shadow-lg rounded">
+          <div class="location-image shadow-sm rounded animate-zoom-in">
             <img src="@/assets/location.jpg" alt="Location" class="img-fluid rounded" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Footer -->
-    <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
-import Footer from '@/components/Footer.vue';
-import backgroundImage from '@/assets/backk.png'; // importi i figurës për sfondin
-
 export default {
   name: "ContactForm",
-  components: {
-    Navbar,
-    Footer
-  },
   data() {
     return {
       form: {
@@ -65,12 +72,6 @@ export default {
         message: ''
       },
       submitted: false,
-      backgroundStyle: {
-        background: `url(${backgroundImage}) no-repeat center center fixed`,
-        backgroundSize: 'cover',
-        minHeight: '100vh',
-        paddingTop: '50px' // hapësirë lart për të ndihmuar që form-container të jetë i dukshëm
-      }
     };
   },
   methods: {
@@ -86,27 +87,87 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
 .contact-background {
-  background-image: url('@/assets/backk.png');
+  position: relative;
+  background-image: url('@/assets/back.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Form container */
+/* Overlay */
+.contact-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* Permbajtja mbi overlay */
+.container, .form-container, .location-image {
+  position: relative;
+  z-index: 1;
+}
+
 .form-container {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 30px;
   border-radius: 10px;
   max-width: 500px;
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: 50px; /* Hapësirë për Footer */
 }
 
-/* Animations */
+.contact-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-select {
+  border: 1.5px solid #6c757d;
+  font-weight: 600;
+  color: #495057;
+  background-color: #e9ecef;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-select:focus {
+  border-color: #495057;
+  box-shadow: 0 0 5px #adb5bd;
+  outline: none;
+}
+
+.filter-label {
+  color: #495057;
+  font-weight: 600;
+}
+
+.reset-btn {
+  font-weight: 600;
+  border-width: 1.5px;
+  border-color: #0d6efd;
+  color: #0d6efd;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+/* Animacionet */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -122,43 +183,24 @@ export default {
   animation: zoomIn 0.6s ease-in-out;
 }
 
-/* Hover Zoom Effect for Card */
-.card {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.card-hover:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-.card-img-top {
-  width: 100%;
-  height: 300px; /* Adjust the height as per your preference */
-  object-fit: cover; /* This ensures images are cropped and fit the container */
-  border-radius: 0.25rem;
+/* Foto lokacioni */
+.location-image {
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
+  height: 480px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-footer a:hover {
-  text-decoration: underline;
+.location-image img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 body {
   background-color: #fefefe;
   font-family: 'Segoe UI', sans-serif;
-}
-
-/* Foto Lokacioni */
-.location-image {
-  margin-top: 100px;
-  position: relative;
-  overflow: hidden;
-  height: 480px; /* Gjatësia e imazhit të barabartë me formularin */
-  box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.2); /* Hija e imazhit për ta dalluar nga backgroundi */
-}
-
-.location-image img {
-  width: 100%;
-  height: 480px; /* Sigurohuni që imazhi të ketë të njëjtën gjatësi me formën */
-  object-fit: cover; /* Imazhi ruan proporcioni dhe mbulon hapësirën e përcaktuar */
-  border-radius: 10px; /* Rrethimi i imazhit për të krijuar një pamje më të bukur */
 }
 </style>
