@@ -3,6 +3,8 @@ import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import DashboardView from '@/views/DashboardView.vue';
 import ContactForm from '@/views/ContactForm.vue'; 
+import AboutUs from '@/views/AboutUs.vue'
+import OurServices from '@/views/OurServices.vue';  
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -21,6 +23,16 @@ const routes = [
     path: '/albania',
     name: 'AlbaniaDetails',
     component: () => import('@/views/AlbaniaDetails.vue')
+  },
+  {
+    path: '/about',
+    name: 'AboutUs',
+    component: AboutUs
+  },
+  {
+    path: '/services',
+    name: 'OurServices', 
+    component: OurServices  
   }
 ];
 
